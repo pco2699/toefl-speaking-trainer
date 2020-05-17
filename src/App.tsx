@@ -16,20 +16,16 @@ interface Props {
 
 function Timer() {
   const { start, stop, player } = useRecorder();
-  const { seconds, start: startTimer, reset, isRunning, isExpired } = useTimer({ inputSec: 45, onExpire: () =>  stop() });
+  const { seconds, start: startTimer, reset, isRunning, isExpired } = useTimer({ inputSec: 45, onExpire: () => {quitAll();} });
 
-  function resetAll() {
+  function quitAll() {
+    stop();
     reset();
   }
 
-  function quitAll() {
-    stop()
-    resetAll()
-  }
-
   function startAll() {
-    startTimer()
-    start()
+    startTimer();
+    start();
   }
 
 
@@ -44,7 +40,7 @@ function Timer() {
         <Container>
           <Row  className="justify-content-center">
                 {isExpired ?
-                      (<Button variant="primary" onClick={resetAll}>Reset</Button>) :
+                      (<Button onClick={startAll}>Restart</Button>) :
                       (isRunning ?
                         (<Button onClick={quitAll}>Quit</Button>) :
                         (<Button onClick={startAll}>Start</Button>)
