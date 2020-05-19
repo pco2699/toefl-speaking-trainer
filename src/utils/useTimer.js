@@ -6,7 +6,6 @@ export default function useTimer(settings) {
   const { inputSec, onExpire } = settings || {};
   const [seconds, setSeconds] = useState(inputSec);
   const [isRunning, setIsRunning] = useState(false);
-  const [isExpired, setIsExpired] = useState(false);
   const intervalRef = useRef();
 
   function clearIntervalRef() {
@@ -20,7 +19,6 @@ export default function useTimer(settings) {
   function handleExpire() {
     clearIntervalRef();
     Validate.onExpire(onExpire) && onExpire();
-    setIsExpired(true);
   }
 
   function start() {
@@ -42,7 +40,6 @@ export default function useTimer(settings) {
   function reset() {
     clearIntervalRef();
     setSeconds(inputSec);
-    setIsExpired(false);
   }
 
 
@@ -52,6 +49,6 @@ export default function useTimer(settings) {
 
 
   return {
-    ...Time.getTimeFromSeconds(seconds), start, reset, isRunning, isExpired
+    ...Time.getTimeFromSeconds(seconds), start, reset, isRunning
   };
 }

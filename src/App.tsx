@@ -39,12 +39,11 @@ function Timer() {
 
         <Container>
           <Row  className="justify-content-center">
-                {isExpired ?
-                      (<Button onClick={startAll}>Restart</Button>) :
-                      (isRunning ?
-                        (<Button onClick={quitAll}>Quit</Button>) :
-                        (<Button onClick={startAll}>Start</Button>)
-                      )
+                {
+                    (isRunning ?
+                      (<Button onClick={quitAll}>Quit</Button>) :
+                      (<Button onClick={startAll}>Start</Button>)
+                    )
                 }
           </Row>
           <Row  className="justify-content-center mt-3">
