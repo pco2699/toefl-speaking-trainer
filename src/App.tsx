@@ -16,7 +16,7 @@ interface Props {
 
 function Timer() {
   const { start, stop, player } = useRecorder();
-  const { seconds, start: startTimer, reset, isRunning, isExpired } = useTimer({ inputSec: 45, onExpire: () => {quitAll();} });
+  const { seconds, start: startTimer, reset, isRunning } = useTimer({ inputSec: 45, onExpire: () => {quitAll();} });
 
   function quitAll() {
     stop();
