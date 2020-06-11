@@ -4,7 +4,8 @@ import Validate from './Validate';
 
 export default function useTimer(settings) {
   const { inputSec, onExpire } = settings || {};
-  const [seconds, setSeconds] = useState(inputSec);
+  const [initialSec, setInitialSec] = useState(inputSec);
+  const [seconds, setSeconds] = useState(initialSec);
   const [isRunning, setIsRunning] = useState(false);
   const intervalRef = useRef();
 
@@ -21,10 +22,15 @@ export default function useTimer(settings) {
     Validate.onExpire(onExpire) && onExpire();
   }
 
+  function setInit(sec) {
+    setInitialSec(sec);
+    setSeconds(sec);
+  }
+
   function start() {
     if (!intervalRef.current) {
       const expiryTime = new Date();
-      expiryTime.setSeconds(expiryTime.getSeconds() + inputSec);
+      expiryTime.setSeconds(expiryTime.getSeconds() + initialSec);
 
       setIsRunning(true);
       intervalRef.current = setInterval(() => {
@@ -37,11 +43,13 @@ export default function useTimer(settings) {
     }
   }
 
-  function reset() {
+  function stop() {
     clearIntervalRef();
-    setSeconds(inputSec);
   }
 
+  function reset(){
+    setSeconds(initialSec);
+  }
 
   useEffect(() => {
     return clearIntervalRef;
@@ -49,6 +57,6 @@ export default function useTimer(settings) {
 
 
   return {
-    ...Time.getTimeFromSeconds(seconds), start, reset, isRunning
+    seconds, start, reset, stop, isRunning, setInit, initialSec
   };
 }

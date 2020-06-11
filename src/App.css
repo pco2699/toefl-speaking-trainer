@@ -19,6 +19,11 @@ a, a:hover {
   }
 }
 
+input {
+  width: 50px;
+  padding-left: 7px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
