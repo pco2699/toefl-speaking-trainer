@@ -69,14 +69,15 @@ function Timer() {
           <Row  className="justify-content-center mt-3">
               {!!player && 
                   (
-                  <ButtonGroup><Button onClick={() => player.play()}>play sound</Button>
-                  <Button onClick={() => player.pause()}>pause sound</Button>
+                  <ButtonGroup><Button onClick={() => player.play()}>Play</Button>
+                  <Button onClick={() => player.pause()}>Pause</Button>
+                  <Button onClick={() => { player.currentTime = 0 }}>Reset</Button>
                   <Button>
                           <a
                             href={player.src}
                             download={`recording-${Date.now()}`}
                           >
-                            download
+                            Download
                           </a>
                     </Button>
                   </ButtonGroup>)}
